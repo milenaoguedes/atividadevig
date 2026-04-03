@@ -1,1 +1,16 @@
+# Criar script que confira para que pasta o projeto está apontando e, caso a pasta não exista, crie a pasta; e caso, a pasta já exista configure para a pasta de trabalho correta.
 
+# identificar em qual diretório está sendo trabalhado:
+getwd()
+
+# Caso deseja selecionar um diretório específico, utilizar:
+setwd("C:/Users/Nome/Desktop/Nome_da_pasta") # entre aspas "", colocar o endereço da pasta que deseja salvar/acessar um arquivo
+
+# Cria uma nova pasta no diretório de trabalho atual:
+dir.create("pasta_nova")
+
+# Para identificar se a pasta existe:
+dir.exists("pasta_nova")
+
+# Cria a pasta somente se ela não existir:
+dir.create("pasta_nova_2")
