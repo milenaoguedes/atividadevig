@@ -1,1 +1,5 @@
+# Construção de um prompt para buscar e esclarecer erros em um script R
 
+# Definir a Linguagem de programação que deseja utilizar; o papel que a IA deverá "atuar"; a tarefa que será realizada; e o produto que deseja obter. Exemplo:
+
+Linguage code: R; Role: programador R; Task: Esclarecer erros em um script R; Product: explicação detalhada do erro gerado, com base na mensagem a seguir: "colar mensagem de erro gerada".
