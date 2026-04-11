@@ -1,4 +1,4 @@
-# Criar o script de descrição dos dados brutos
+# Criar o script de descrição dos dados brutos (raw)
 
 # SUBINDO O BANCO DE DADOS PARA O R
 banco_dados <- read.csv("C:/Users/Pessoa/Desktop/NomePasta/NomeArquivo") # Colocar o endereço do arquivo entre “...”
