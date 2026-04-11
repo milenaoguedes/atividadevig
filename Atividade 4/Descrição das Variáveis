@@ -1,0 +1,11 @@
+# Criar o script de descrição dos dados brutos
+
+# SUBINDO O BANCO DE DADOS PARA O R
+banco_dados <- read.csv("C:/Users/Pessoa/Desktop/NomePasta/NomeArquivo") # Colocar o endereço do arquivo entre “...”
+View(banco_dados)
+
+# Avaliação de possíveis inconsistências
+summary(banco_dados) 
+
+# Identificando o tipo de variável de cada coluna
+glimpse(banco_dados)
