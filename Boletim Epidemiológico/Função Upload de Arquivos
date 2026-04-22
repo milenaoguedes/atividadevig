@@ -17,3 +17,42 @@ dados <- carregar_csv_drive("pasta/subpasta/arquivo.csv")
 # install.packages("googledrive")
 # library(googledrive)
 # e utilizada a função "drive_auth()" para liberar o acesso a conta do Google Drive
+
+#..............................................................................................................................................
+# Função "upload_grafico_drive", abre um arquivo png do Google Drive para o R
+# Como a função funciona: localiza um arquivo a partir de um "caminho" que será informado por você. Este arquivo é baixado no pc de forma temporária, é lida pelo R e salvo em um objeto e, posteriormente o arquivo temporário do pc é excluído, ficando apenas no R
+
+upload_grafico_drive <- function(objeto_grafico, nome_arquivo, caminho_drive, largura = 10, altura = 6, dpi = 300) {
+  # Criar arquivo temporário com extensão .png
+  temp <- tempfile(fileext = ".png")
+  
+  # Salvar o gráfico ggplot no arquivo temporário
+  ggsave(filename = temp, 
+         plot = objeto_grafico, 
+         width = largura, 
+         height = altura, 
+         dpi = dpi,
+         bg = "white")
+  
+  # Fazer upload para o Google Drive
+  drive_upload(
+    media = temp,
+    path = caminho_drive,
+    name = nome_arquivo,
+    overwrite = TRUE
+  )
+  
+  # Excluir o arquivo temporário
+  file.remove(temp)
+  
+  cat("✅ Upload concluído:", nome_arquivo, "\n")
+}
+
+
+# Agora a função está disponível!
+
+#Exemplo de uso: upload_grafico_drive(
+#  objeto = plot_tratamento,
+#  nome_arquivo = "Distribuição por Esquema de Tratamento",
+#  caminho_drive = "Boletim_Sifilis_Gestante/documentos/relatórios/")
+
