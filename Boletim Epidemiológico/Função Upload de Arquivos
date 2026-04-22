@@ -9,7 +9,7 @@ carregar_csv_drive <- function(caminho) {
   return(dados)
 }
 
-# Agora a função está disponível!
+
 dados <- carregar_csv_drive("pasta/subpasta/arquivo.csv")
 #.................................... ↑↑ caminho informado por você
 
@@ -18,8 +18,30 @@ dados <- carregar_csv_drive("pasta/subpasta/arquivo.csv")
 # library(googledrive)
 # e utilizada a função "drive_auth()" para liberar o acesso a conta do Google Drive
 
+
 #..............................................................................................................................................
-# Função "upload_grafico_drive", abre um arquivo png do Google Drive para o R
+# Função "upload_objeto_drive" que faz o upload do objeto como arquivo csv do R para o Google Drive
+upload_objeto_drive <- function(objeto, nome_arquivo, caminho_drive) {
+  temp <- tempfile(fileext = ".csv") # Criar arquivo temporário
+  write.table(objeto, temp, fileEncoding = "UTF-8", sep = ";", row.names = FALSE)# Salvar objeto no arquivo temporário
+  drive_upload(
+    media = temp,
+    path = caminho_drive,
+    name = nome_arquivo,
+    overwrite = TRUE) # Fazer upload
+  file.remove(temp)# exclui o arquivo temporário
+    cat("✅ Upload concluído:", nome_arquivo, "\n")
+}
+
+#Exemplo de uso:
+#upload_objeto_drive(
+#  objeto = dados_consolidados,
+#  nome_arquivo = "SIFGBRCONSOLIDADO.csv",
+#  caminho_drive = "Boletim_Sifilis_Gestante/dados/transiente/")
+
+
+#..............................................................................................................................................
+# Função "upload_grafico_drive", abre um arquivo png do R para o Google Drive
 # Como a função funciona: localiza um arquivo a partir de um "caminho" que será informado por você. Este arquivo é baixado no pc de forma temporária, é lida pelo R e salvo em um objeto e, posteriormente o arquivo temporário do pc é excluído, ficando apenas no R
 
 upload_grafico_drive <- function(objeto_grafico, nome_arquivo, caminho_drive, largura = 10, altura = 6, dpi = 300) {
@@ -48,8 +70,6 @@ upload_grafico_drive <- function(objeto_grafico, nome_arquivo, caminho_drive, la
   cat("✅ Upload concluído:", nome_arquivo, "\n")
 }
 
-
-# Agora a função está disponível!
 
 #Exemplo de uso: upload_grafico_drive(
 #  objeto = plot_tratamento,
